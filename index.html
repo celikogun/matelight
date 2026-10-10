@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mate Education</title>
 <meta name="description" content="MATE Education builds institutional assessment capacity: CEFR-aligned English language exams, item writing and review, rubric design and quality assurance.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23F6F4EF%27/%3E%3Ccircle cx=%2729%27 cy=%2734%27 r=%2716%27 fill=%27none%27 stroke=%27%23132650%27 stroke-width=%277%27/%3E%3Cpath d=%27M45 16v34%27 stroke=%27%23132650%27 stroke-width=%277%27/%3E%3Cpath d=%27M21 34l6 6 11-12%27 fill=%27none%27 stroke=%27%235E8665%27 stroke-width=%275.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<meta name="theme-color" content="#F6F4EF">
+<meta property="og:title" content="MATE Education">
+<meta property="og:description" content="Beyond tests. Building better assessment systems for institutions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap">
@@ -69,8 +73,8 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;backgroun
 .hero h1{font-size:clamp(2.5rem,6.4vw,4.8rem);letter-spacing:-.025em;line-height:1.02}
 .hero .lede{margin-top:28px;max-width:52ch;color:var(--muted);font-size:1.125rem}
 .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:500;text-decoration:none;font-size:1rem;border:1px solid transparent;transition:transform .15s ease}
-.btn:hover{transform:translateY(-1px)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:500;text-decoration:none;font-size:1rem;border:1px solid transparent}
+@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
 .btn-primary{background:var(--navy);color:var(--bg)}
 .btn-ghost{border-color:var(--fg);color:var(--fg)}
 
@@ -167,6 +171,40 @@ section.block{padding-block:clamp(64px,9vw,120px)}
 
 footer{background:var(--bg);color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:24px}
+
+/* polish: gentle hover feedback, desktop pointers only */
+::selection{background:var(--sage-soft);color:var(--fg)}
+.btn-primary::after{content:"→";display:inline-block;transition:transform .3s ease}
+.btn,.cta-sm,.copy,.line,.card,.svc,.why>div,.check li,.ico,.tick,.steps li::before,.spines span,.portrait,.logo .mark,.pillars>div{transition:all .35s cubic-bezier(.2,.7,.2,1)}
+.nav ul a{position:relative;transition:color .25s ease}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--sage);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+@media (hover:hover) and (pointer:fine){
+  .logo:hover .mark{transform:translateY(-1px);opacity:.85}
+  .nav ul a:hover::after{transform:scaleX(1)}
+  .nav .cta-sm:hover{background:var(--sage)}
+  .btn{transition:transform .25s ease,box-shadow .25s ease,background-color .25s ease,color .25s ease}
+  .btn-primary:hover{box-shadow:0 10px 24px -12px rgba(19,38,80,.55)}
+  .btn-primary:hover::after{transform:translateX(4px)}
+  .btn-ghost:hover{background:var(--fg);color:var(--bg)}
+  .check li:hover{transform:translateX(4px)}
+  .check li:hover .tick{transform:scale(1.1)}
+  .pillars>div:hover{border-top-color:var(--sage)}
+  .svc:hover .ico{background:var(--sage);color:var(--surface);transform:rotate(-6deg)}
+  .svc:hover h3{color:var(--navy)}
+  .svc:hover .terms span{border-color:var(--sage-ring)}
+  .steps li:hover::before{color:var(--fg);border-bottom-color:var(--sage)}
+  .why>div:hover{background:var(--bg)}
+  .card:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(19,35,74,.45);border-color:var(--sage-ring)}
+  .portrait:hover{transform:scale(1.01);box-shadow:0 26px 50px -30px rgba(19,35,74,.45)}
+  .spines span:hover{transform:translateX(6px)}
+  .line:hover{border-color:var(--sage);transform:translateY(-2px)}
+  .copy:hover{background:var(--sage);color:var(--surface);border-color:var(--sage)}
+  .contact a:hover{color:var(--sage)}
+}
+.steps li::before{transition:color .3s ease,border-color .3s ease}
+.btn:active,.copy:active{transform:scale(.98)}
+.portrait{border-radius:18px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
 </style>
 </head>
 <body>
@@ -329,7 +367,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <div>
         <p class="name">Dr. Merve<br><span class="green">Selçuk</span></p>
         <p class="role">Founder, MATE Education</p>
-        <p class="bio">Merve Selçuk founded MATE to help institutions move beyond one-off tests towards assessment systems they can trust. Her work covers language assessment, writing assessment and rubric design, test specification and item quality. Add a short professional bio here: degrees, years in language testing, and the institutions she has worked with.</p>
+        <p class="bio">Merve founded MATE to help institutions move beyond one-off tests towards assessment systems they can trust. Her work covers language assessment, writing assessment and rubric design, test specification and item quality. Add a short professional bio here: degrees, years in language testing, and the institutions she has worked with.</p>
         <div class="spines" aria-hidden="true"><span>Language Assessment</span><span>Testing in Practice</span><span>Assessment Systems</span></div>
       </div>
     </div>
