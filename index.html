@@ -70,7 +70,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;backgroun
 .hero-grid>*{min-width:0}
 .hero .tag{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);line-height:1.9}
 .hero .rule{width:64px;height:2px;background:var(--sage);margin-block:28px}
-.hero h1{font-size:clamp(2.5rem,6.4vw,4.8rem);letter-spacing:-.025em;line-height:1.02}
+.hero .hero-title{font-size:clamp(2.5rem,6.4vw,4.8rem);letter-spacing:-.025em;line-height:1.02}
 .hero .lede{margin-top:28px;max-width:52ch;color:var(--muted);font-size:1.125rem}
 .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:500;text-decoration:none;font-size:1rem;border:1px solid transparent}
@@ -205,13 +205,57 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 .btn:active,.copy:active{transform:scale(.98)}
 .portrait{border-radius:18px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+
+/* intro: animated wordmark screen that opens the site */
+.intro{position:relative;overflow:hidden;min-height:calc(100svh - 64px);display:grid;place-items:center;align-content:center;gap:clamp(20px,4vh,34px);text-align:center;padding-block:56px 96px;padding-inline:clamp(16px,5vw,48px);background:var(--bg)}
+.intro-ring{position:absolute;border-radius:50%;pointer-events:none;border:solid var(--sage-ring)}
+.intro-ring.r1{width:min(92vw,820px);aspect-ratio:1;border-width:clamp(44px,8vw,100px);right:-22%;top:-38%;animation:intro-drift 22s ease-in-out infinite alternate}
+.intro-ring.r2{width:min(60vw,460px);aspect-ratio:1;border-width:clamp(30px,5vw,60px);left:-16%;bottom:-30%;opacity:.7;animation:intro-drift 26s ease-in-out infinite alternate-reverse}
+@keyframes intro-drift{to{transform:translate(-18px,14px) rotate(4deg)}}
+.intro-dots{position:absolute;width:84px;height:70px;background-image:radial-gradient(var(--dot) 1.8px,transparent 1.9px);background-size:14px 14px;pointer-events:none}
+.intro-dots.d1{right:clamp(16px,6vw,72px);bottom:clamp(70px,12vh,120px)}
+.intro-dots.d2{left:clamp(16px,6vw,72px);top:clamp(60px,12vh,120px)}
+.intro>h1,.intro>p,.intro>ul,.intro>.intro-rule{position:relative}
+.intro h1{margin:0;line-height:0}
+.intro-logo{width:min(78vw,520px);height:auto;overflow:visible;cursor:pointer;color:var(--navy)}
+.intro-logo .ink{fill:none;stroke:currentColor;stroke-width:9;stroke-dasharray:1.05;stroke-dashoffset:1.05;animation:intro-write .9s cubic-bezier(.6,.05,.3,1) forwards}
+.intro-logo .tick{fill:none;stroke:var(--sage);stroke-width:7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.05;stroke-dashoffset:1.05;animation:intro-write .45s cubic-bezier(.3,.7,.2,1) 2.15s forwards}
+.intro-logo .m1{animation-delay:.15s}.intro-logo .m2{animation-delay:.3s}.intro-logo .m3{animation-delay:.45s}
+.intro-logo .a1{animation-delay:.7s}.intro-logo .a2{animation-delay:.95s}
+.intro-logo .t1{animation-delay:1.15s}.intro-logo .t2{animation-delay:1.35s}
+.intro-logo .e1{animation-delay:1.5s}
+.intro-logo .pop{transform-box:fill-box;transform-origin:center;animation:intro-pop .5s cubic-bezier(.3,1.6,.5,1) 2.45s both}
+@keyframes intro-write{to{stroke-dashoffset:0}}
+@keyframes intro-pop{0%{transform:scale(1)}45%{transform:scale(1.18)}100%{transform:scale(1)}}
+.intro-rule{width:56px;height:2px;background:var(--sage);transform:scaleX(0);animation:intro-grow .6s ease 2.6s forwards}
+@keyframes intro-grow{to{transform:scaleX(1)}}
+.intro-tag{font-family:var(--serif);font-size:clamp(1.5rem,3.6vw,2.4rem);line-height:1.2;letter-spacing:-.01em;max-width:22ch;text-wrap:balance}
+.intro-checks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:0;padding:0;list-style:none;font-size:.95rem;color:var(--muted)}
+.intro-checks li{display:inline-flex;align-items:center;gap:8px}
+.intro-checks svg{width:14px;height:14px;flex:none}
+.intro-rise{opacity:0;transform:translateY(12px);animation:intro-rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+.intro-rise.s1{animation-delay:2.75s}.intro-rise.s2{animation-delay:2.95s}.intro-rise.s3{animation-delay:3.3s}
+@keyframes intro-rise{to{opacity:1;transform:none}}
+.intro-cue{position:absolute!important;left:50%;bottom:28px;translate:-50% 0;display:grid;justify-items:center;gap:8px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.intro-cue span{width:22px;height:34px;border:1.5px solid currentColor;border-radius:12px;position:relative}
+.intro-cue span::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--sage);animation:intro-wheel 1.8s ease-in-out infinite}
+@keyframes intro-wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{transform:translateY(0);opacity:0}}
+@media (hover:hover){.intro-cue:hover{color:var(--sage)}}
+.hero::before,.hero>.dots{display:none}
+.hero{border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){
+  .intro-logo .ink,.intro-logo .tick{stroke-dashoffset:0;animation:none}
+  .intro-logo .pop,.intro-ring,.intro-cue span::after{animation:none}
+  .intro-rule{transform:none;animation:none}
+  .intro-rise{opacity:1;transform:none;animation:none}
+}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap nav">
-    <a class="logo" href="#top" aria-label="MATE Education home"><svg class="mark" viewBox="0 0 228 80" role="img" aria-label="mate"><g fill="none" stroke="currentColor" stroke-width="9"><path d="M9 70V25M9 41a14 14 0 0 1 28 0V70M37 41a14 14 0 0 1 28 0V70"/><circle cx="100" cy="47.5" r="20"/><path d="M120 25V70"/><path d="M150 12V58a12 12 0 0 0 12 12h5M140 30h24"/><path d="M178 47.5h40a20 20 0 1 0-5.9 14.1"/></g><path d="M90 47l8 8.5 15-17" fill="none" stroke="#6B9675" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="logo" href="#top" aria-label="MATE Education home"><svg class="mark" viewBox="0 0 228 80" role="img" aria-label="mate"><g fill="none" stroke="currentColor" stroke-width="9"><path d="M9 70V25M9 41a14 14 0 0 1 28 0V70M37 41a14 14 0 0 1 28 0V70"/><circle cx="100" cy="47.5" r="20"/><path d="M120 23V70"/><path d="M150 12V58a12 12 0 0 0 12 12h5M140 30h24"/><path d="M178 47.5h40a20 20 0 1 0-5.9 14.1"/></g><path d="M90 47l8 8.5 15-17" fill="none" stroke="#6B9675" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     <ul>
       <li><a href="#services">Services</a></li>
       <li><a href="#approach">Approach</a></li>
@@ -223,13 +267,37 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 </header>
 
 <main id="top">
-  <section class="hero">
+  <section class="intro" aria-label="Welcome">
+    <span class="intro-ring r1" aria-hidden="true"></span>
+    <span class="intro-ring r2" aria-hidden="true"></span>
+    <span class="intro-dots d1" aria-hidden="true"></span>
+    <span class="intro-dots d2" aria-hidden="true"></span>
+    <h1><svg class="intro-logo" id="introLogo" viewBox="0 0 228 80" role="img" aria-label="mate">
+      <title>mate</title>
+      <path class="ink m1" pathLength="1" d="M9 70V25"/>
+      <path class="ink m2" pathLength="1" d="M9 41a14 14 0 0 1 28 0V70"/>
+      <path class="ink m3" pathLength="1" d="M37 41a14 14 0 0 1 28 0V70"/>
+      <circle class="ink a1" pathLength="1" cx="100" cy="47.5" r="20" transform="rotate(-90 100 47.5)"/>
+      <path class="ink a2" pathLength="1" d="M120 23V70"/>
+      <path class="ink t1" pathLength="1" d="M150 12V58a12 12 0 0 0 12 12h5"/>
+      <path class="ink t2" pathLength="1" d="M140 30h24"/>
+      <path class="ink e1" pathLength="1" d="M178 47.5h40a20 20 0 1 0-5.9 14.1"/>
+      <g class="pop"><path class="tick" pathLength="1" d="M90 47l8 8.5 15-17"/></g>
+    </svg></h1>
+    <span class="intro-rule" aria-hidden="true"></span>
+    <p class="intro-tag intro-rise s1">Beyond tests. <span class="green">Building better assessment systems.</span></p>
+    <ul class="intro-checks intro-rise s2">
+      <li><svg viewBox="0 0 14 14"><path d="M2.5 7.4 5.6 10.2 11.5 3.8" fill="none" stroke="#5E8665" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Exam design</li><li><svg viewBox="0 0 14 14"><path d="M2.5 7.4 5.6 10.2 11.5 3.8" fill="none" stroke="#5E8665" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>CEFR alignment</li><li><svg viewBox="0 0 14 14"><path d="M2.5 7.4 5.6 10.2 11.5 3.8" fill="none" stroke="#5E8665" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Item review</li><li><svg viewBox="0 0 14 14"><path d="M2.5 7.4 5.6 10.2 11.5 3.8" fill="none" stroke="#5E8665" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rubrics &amp; training</li>
+    </ul>
+    <a class="intro-cue intro-rise s3" href="#more">Scroll<span aria-hidden="true"></span></a>
+  </section>
+
+  <section class="hero" id="more">
     <span class="dots" aria-hidden="true"></span>
     <div class="wrap hero-grid">
       <div>
-        <div class="tag">Beyond tests.<br>Building better assessment systems.</div>
-        <div class="rule"></div>
-        <h1>We don’t train individuals. <span class="green">We build institutional assessment capacity.</span></h1>
+        <div class="rule" style="margin-top:0"></div>
+        <h2 class="hero-title">We don’t train individuals. <span class="green">We build institutional assessment capacity.</span></h2>
         <p class="lede">MATE is a strategic assessment partner for schools, universities and language programmes. We help you design, review and run English language exams that are fair, valid and aligned to the CEFR.</p>
         <div class="btns">
           <a class="btn btn-primary" href="#contact">Book a consultation</a>
@@ -367,7 +435,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
       <div>
         <p class="name">Dr. Merve<br><span class="green">Selçuk</span></p>
         <p class="role">Founder, MATE Education</p>
-        <p class="bio">Merve Selçuk founded MATE to help institutions move beyond one-off tests towards assessment systems they can trust. Her work covers language assessment, writing assessment and rubric design, test specification and item quality.</p>
+        <p class="bio">Merve founded MATE to help institutions move beyond one-off tests towards assessment systems they can trust. Her work covers language assessment, writing assessment and rubric design, test specification and item quality. Add a short professional bio here: degrees, years in language testing, and the institutions she has worked with.</p>
         <div class="spines" aria-hidden="true"><span>Language Assessment</span><span>Testing in Practice</span><span>Assessment Systems</span></div>
       </div>
     </div>
@@ -393,6 +461,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   <div class="wrap"><span>© 2026 MATE Education</span><span>Beyond tests. Building better assessment systems.</span></div>
 </footer>
 
+<script>
+(function(){
+  var logo=document.getElementById('introLogo'); if(!logo) return;
+  logo.addEventListener('click',function(){
+    logo.querySelectorAll('.ink,.tick,.pop').forEach(function(el){el.style.animation='none';void el.getBoundingClientRect();el.style.animation='';});
+  });
+})();
+</script>
 <script>
 document.querySelectorAll('.copy').forEach(function(b){
   b.addEventListener('click',function(){
